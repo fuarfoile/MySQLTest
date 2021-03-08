@@ -31,7 +31,7 @@ ENGINE=InnoDB
 DEFAULT CHARSET=utf8;
 ```
 
-3. Типы транспорта реализованны как отношение «многие ко многим», так как одна машина может запросто подходить в несколько категорий. Скажем, Jaguar I-PACE можно занести как в категорию "SUV", так и в категорию "Электромобиль".
+3. Типы транспорта реализованы как отношение «многие ко многим», так как одна машина может запросто подходить в несколько категорий. Скажем, Jaguar I-PACE можно занести как в категорию "SUV", так и в категорию "Электромобиль".
 ```sql
 CREATE TABLE `ria_types` (
   `type_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -67,7 +67,7 @@ DEFAULT CHARACTER SET = utf8;
 
 Решение:
 1. [MySQLTest1.sql](https://github.com/fuarfoile/MySQLTest/blob/main/MySQLTest1.sql)  
-Присоеденяем таблицу городов к авто и фильтруем нужные по названию города:
+Присоединяем таблицу городов к авто и фильтруем нужные по названию города:
 ```sql
 SELECT auto_id, user_id, mark_id, model_id, version, price, ci.name AS city
 FROM test.ria_auto
@@ -96,7 +96,7 @@ INNER JOIN test.ria_cities ci USING(city_id)
 GROUP BY city_id;
 ```  
 [MySQLTest3_2.sql](https://github.com/fuarfoile/MySQLTest/blob/main/MySQLTest3_2.sql)  
-Если же трактовать как "количестово авто каждой марки по каждому городу и среднюю цену авто по марке в каждом городе":  
+Если же трактовать как "количество авто каждой марки по каждому городу и среднюю цену авто по марке в каждом городе":  
 Группируем по городу и по модели, считаем количество вхождений. Среднюю цену, аналогично, считаем через avg(price):
 ```sql
 SELECT ci.name, mo.name, count(*) as count, avg(price) as 'avg price' FROM test.ria_auto
